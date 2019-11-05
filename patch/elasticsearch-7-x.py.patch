@@ -1,0 +1,11 @@
+--- /patch/elasticsearch-7-x.py.patch      2019-11-05 22:40:30.987647041 +0000
++++ redash/query_runner/elasticsearch.py      2019-11-05 22:33:42.795548290 +0000
+@@ -151,7 +151,7 @@
+             '''
+             path = path or []
+             result = []
+-            for field, description in doc['properties'].items():
++            for field, description in doc.get('properties', doc).items():
+                 if 'properties' in description:
+                     result.extend(parse_doc(description, path + [field]))
+                 else:
